@@ -26,7 +26,7 @@ class OrderStoreHandler(tornado.web.RequestHandler):
 
 def main():
     application = tornado.web.Application([
-        (r"/store_order", RefundHandler),
+        (r"/store_order", OrderStoreHandler),
     ])
     http_server = tornado.httpserver.HTTPServer(application)
     http_server.listen(options.port)
