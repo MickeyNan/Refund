@@ -57,24 +57,14 @@ def parse_order(request_str):
 class OrderStoreHandler(tornado.web.RequestHandler):
 	@gen.coroutine
 	def post(self):
+		print self.request.body
 		order_info = yield parse_order(self.request.body)
-		doc_count = yield mongo_collection.find_one({'order_id': order_info['order_id']}).count()
-		if (doc_count == 0):
-			yield mongo_collection.insert_one(order_info)
-		else:
-			yield mongo_collection.update_one({'order_id': order_info['order_id']},{'$set': {'order_info': order_info['order_info']}})
+		old = yield mongo_collection.find_one({'order_id'})
 
 		self.write({"status": "success"})
 
-	@gen.coroutine
 	def get(self):
-		order_info = yield parse_order(self.request.body)
-		doc_count = yield mongo_collection.find_one({'order_id': order_info['order_id']}).count()
-		if (doc_count == 0):
-			yield mongo_collection.insert_one(order_info)
-		else:
-			yield mongo_collection.update_one({'order_id': order_info['order_id']},{'$set': {'order_info': order_info['order_info']}})
-
+		print self.request.body
 		self.write({"status": "success"})
 
 
