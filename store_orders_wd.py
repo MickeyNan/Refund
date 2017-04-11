@@ -11,7 +11,6 @@ import tornado.options
 import tornado.web
 import hashlib
 from tornado.options import define, options
-from concurrent.futures import ThreadPoolExecutor
 
 define("port", default=8006, help="run on the given port", type=int)
 
