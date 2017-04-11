@@ -17,11 +17,11 @@ define("port", default=8006, help="run on the given port", type=int)
 class OrderStoreHandler(tornado.web.RequestHandler):
 	def post(self):
 		print self.request.body
-		self.write({"status": "post ok"})
+		self.write({"status": "success"})
 
 	def get(self):
 		print self.request.body
-		self.write({"status": "get ok"})
+		self.write({"status": "success"})
 
 
 def main():
