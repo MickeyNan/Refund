@@ -1,0 +1,4 @@
+<input type="text" placeholder="输入订单号" id="order_id">
+            <input type="text" placeholder="输入买了几箱" id="item_no">
+            <input type="text" placeholder="输入损坏数量" id="error_no">
+            <button id="submit" class="disable" disabled>提交</button>
