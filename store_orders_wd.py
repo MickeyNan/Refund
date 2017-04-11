@@ -32,11 +32,12 @@ mongo_collection = mongo_db[collection_name]
 def parse_order(request_str):
 	decoded = urllib.unquote(request_str)
 	message = decoded.split("content=")[1].split('&public=')[0]
-	message_co = json.loads(message)['message']
+	json_all = json.loads(message)
+	message_co = json_all['message']
 
 	order_id = message_co['order_id']
 	buyer_phone = message_co['buyer_info']['phone']
-	order_type = message_co['type']
+	order_type = json_all['type']
 	user_phone = message_co['user_phone']
 	order_status = message_co['status']
 	items_count = len(message_co['items'])
