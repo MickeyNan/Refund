@@ -22,10 +22,6 @@ jQuery(function(){
   var order_no_ok = false;
   var broke_no_ok = false;
 
-
-
-
-
   $('#phone_no').on('keyup', function() {
     console.log('.on(change) = ' + $(this).val());
     if (phone_no_check($(this).val())) {
@@ -78,6 +74,31 @@ jQuery(function(){
     }else if (!broke_no_ok) {
       alert("输入损坏数量");
     }else {
+      var pic_uploaded = true;
+
+      var progress_bar_list = $(".progress-bar");
+
+      console.log(progress_bar_list.length)
+
+      if (progress_bar_list.length < 1) {
+        alert("未上传图片");
+        return
+      }
+
+      progress_bar_list.each(function(index,element) {
+        var progress = element.style.cssText;
+        if (progress.indexOf("100%") < 0) {
+          pic_uploaded = false
+        }
+      });
+
+
+      if (!pic_uploaded) {
+        alert("图片未上传完毕")
+        return
+      }
+
+      
       var phone_no_final = $('#phone_no').val();
       var order_no_final = $('#order_no').val();
       var broke_no_final = $('#broke_no').val();

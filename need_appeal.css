@@ -2,7 +2,6 @@
 	background-color: white;
 }
 
-
 .vertical_container {
   width: 100%;
   flex-direction: column;
@@ -109,26 +108,129 @@
 }
 
 
+.plupload_container {
+	width: 100%;
+  	flex-direction: row;
+  	display: -webkit-flex;
+  	display:         flex;
+ 	-webkit-align-items: center;
+        align-items: center;
+ 	-webkit-justify-content: center;
+        justify-content: center;
+    margin: 20px 0px;
+}
+
+
+.button_div {
+	width: 100%;
+	margin:20px;
+}
 
 .disable {
-	border: 3px solid #ccc;
-	position: relative;
-	background-color: #fff;
 	color: #ccc;
-	font-size: 60px;
-	width: 100%;
+	outline: none;
 }
 
 
 .submit {
-	border: 3px solid #d00811;
-	position: relative;
-	background-color: #fff;
-	color: #d00811;
-	font-size: 60px;
+	color: black;
 	outline: none;
-	width: 100%;
+
 }
+
+
+.progress{
+		margin-top:2px;
+	    width: 100%;
+	    height: 14px;
+	    margin-bottom: 10px;
+	    overflow: hidden;
+	    background-color: #f5f5f5;
+	    border-radius: 4px;
+	    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+}
+
+.progress-bar{ 
+		background-color: #d00811;
+		background-size: 40px 40px;
+		box-shadow: rgba(0, 0, 0, 0.14902) 0px -1px 0px 0px inset;
+		box-sizing: border-box;
+		color: rgb(255, 255, 255);
+		display: block;
+		float: left; 
+		font-size: 20px;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		transition-delay: 0s;
+		transition-duration: 0.6s;
+		transition-property: width;
+		transition-timing-function: ease;
+		position: relative;
+		width: 266.188px;
+}
+
+
+
+
+
+.circle_span {
+	position: relative;
+	top: 30%;
+}
+.circle{
+  width:150px;
+  height:150px;
+  margin:50px auto;
+  border-radius:50%;
+  border:5px solid #dc0f22;
+  text-align: center;
+  position: relative;
+
+}
+
+.step_div {
+	display: block;
+	position: relative;
+	width: 30px;
+	height: 150px;
+	text-align: center;
+}
+
+.circle .square{
+	margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+	display: block;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#dc0f22;
+    position:relative;
+    transform-origin:50% 75px;
+    animation:10s linear rotate infinite;
+}
+
+
+.test_circle {
+	display: block;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:#dc0f22;
+    position:relative;
+    transform-origin:70% 75px;
+    animation:10s linear rotate infinite;	
+}
+
+@keyframes rotate{
+  to { 
+      transform: rotate(1turn); 
+    }
+}
+
+
 
 label {
 	font-size: 40px;

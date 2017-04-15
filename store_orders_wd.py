@@ -17,14 +17,16 @@ import motor.motor_tornado
 
 define("port", default=8006, help="run on the given port", type=int)
 
-mongo_url = ''
+mongo_url = '127.0.0.1'
 mongo_port = 27017
-db_name = ''
-collection_name = ''
+db_name = 'refund'
+collection_orderinfo = 'order_info'
 
 mongo_client = motor.motor_tornado.MotorClient(mongo_url, mongo_port)
-mongo_db = mongo_client[db_name]
-mongo_collection = mongo_db[collection_name]
+
+@gen.coroutine
+def login(c,db_name):
+	yield c[db_name].authenticate("user_refund", "1234")	
 
 
 
@@ -51,30 +53,51 @@ def parse_order(request_str):
 	order_info['broke_no'] = 0
 	order_info['items_count'] = items_count
 
-	print order_info
 
 	raise gen.Return(order_info)
 
 class OrderStoreHandler(tornado.web.RequestHandler):
 	@gen.coroutine
 	def post(self):
+		yield login(mongo_client,db_name)
+
+		mongo_db = mongo_client[db_name]
+
+		mongo_orderinfo = mongo_db[collection_orderinfo]
+
 		order_info = yield parse_order(self.request.body)
-		doc_count = yield mongo_collection.find_one({'order_id': order_info['order_id']}).count()
+		order_type = order_info['order_type']
+		order_status = order_info['order_status']
+
+		print order_info
+
+		doc_count = yield mongo_orderinfo.find({'order_id': order_info['order_id']}).count()
 		if (doc_count == 0):
-			yield mongo_collection.insert_one(order_info)
+			yield mongo_orderinfo.insert(order_info)
 		else:
-			yield mongo_collection.update_one({'order_id': order_info['order_id']},{'$set': {'order_info': order_info['order_info']}})
+			yield mongo_orderinfo.update({'order_id': order_info['order_id']},{'$set': {'order_type': order_type,'order_status': order_status}})
 
 		self.write({"status": "success"})
 
 	@gen.coroutine
 	def get(self):
+		yield login(mongo_client,db_name)
+
+		mongo_db = mongo_client[db_name]
+
+		mongo_orderinfo = mongo_db[collection_orderinfo]
+
+		
 		order_info = yield parse_order(self.request.body)
-		doc_count = yield mongo_collection.find_one({'order_id': order_info['order_id']}).count()
+		order_type = order_info['order_info']
+		order_status = order_info['order_status']
+		print order_info
+		
+		doc_count = yield mongo_orderinfo.find({'order_id': order_info['order_id']}).count()
 		if (doc_count == 0):
-			yield mongo_collection.insert_one(order_info)
+			yield mongo_orderinfo.insert(order_info)
 		else:
-			yield mongo_collection.update_one({'order_id': order_info['order_id']},{'$set': {'order_info': order_info['order_info']}})
+			yield mongo_orderinfo.update({'order_id': order_info['order_id']},{'$set': {'order_type': order_type,'order_status': order_status}})
 
 		self.write({"status": "success"})
 
