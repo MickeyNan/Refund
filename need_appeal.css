@@ -39,6 +39,9 @@
 	position: relative;
 	top:50%;
 	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
 }
 .input_div {
 	-webkit-flex: 6;
@@ -58,6 +61,9 @@
 	position: relative;
 	top:50%;
 	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
 }
 
 .logo_container {
@@ -227,6 +233,9 @@
 @keyframes rotate{
   to { 
       transform: rotate(1turn); 
+      -webkit-transform: rotate(1turn); 
+	  -moz-transform: rotate(1turn); 
+	  -o-transform: rotate(1turn); 
     }
 }
 
