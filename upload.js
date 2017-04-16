@@ -11,6 +11,8 @@ g_object_name = ''
 now = timestamp = Date.parse(new Date()) / 1000; 
 order_id = ''
 
+server_ip = "http://127.0.0.1"
+
 function send_request()
 {
     var xmlhttp = null;
@@ -25,7 +27,7 @@ function send_request()
   
     if (xmlhttp!=null)
     {
-        serverUrl = 'http://127.0.0.1:8002/token'
+        serverUrl = "http://127.0.0.1" + ':8002/token'
         xmlhttp.open( "GET", serverUrl, false );
         xmlhttp.send(null);
         return xmlhttp.responseText
@@ -49,7 +51,7 @@ function order_check(order_id) {
   
     if (xmlhttp!=null)
     {
-        serverUrl = 'http://127.0.0.1:8005/order_checker'
+        serverUrl = server_ip + ':8005/order_checker'
         xmlhttp.open("POST", serverUrl, false);     
         xmlhttp.send('order_id=' + order_id);
         console.log(xmlhttp.responseText)

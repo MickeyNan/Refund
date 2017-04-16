@@ -22,6 +22,8 @@ jQuery(function(){
   var order_no_ok = false;
   var broke_no_ok = false;
 
+  var server_ip = "http://127.0.0.1"
+
   $('#phone_no').on('keyup', function() {
     console.log('.on(change) = ' + $(this).val());
     if (phone_no_check($(this).val())) {
@@ -98,7 +100,7 @@ jQuery(function(){
         return
       }
 
-      
+
       var phone_no_final = $('#phone_no').val();
       var order_no_final = $('#order_no').val();
       var broke_no_final = $('#broke_no').val();
@@ -112,7 +114,7 @@ jQuery(function(){
       }
 
       $.ajax({
-        url: 'http://127.0.0.1:8005/refund',
+        url: server_ip + ':8005/refund',
         data: JSON.stringify(d),
         type: "post",
         dataType: "json",
